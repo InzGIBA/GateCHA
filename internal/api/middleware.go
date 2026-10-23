@@ -3,11 +3,14 @@ package api
 import (
 	"context"
 	"encoding/json"
+	"log/slog"
 	"net/http"
 	"strings"
+	"time"
 
 	"github.com/Upellift99/GateCHA/internal/auth"
 	"github.com/Upellift99/GateCHA/internal/models"
+	chiMiddleware "github.com/go-chi/chi/v5/middleware"
 	"gorm.io/gorm"
 )
 
@@ -149,6 +152,45 @@ func SecurityHeadersMiddleware(enableHSTS bool) func(http.Handler) http.Handler 
 			next.ServeHTTP(w, r)
 		})
 	}
+}
+
+// RequestLogMiddleware writes one line per request through slog, so
+// GATECHA_LOG_LEVEL applies to it. It replaces chi's Logger, which printed every
+// visitor's IP to stdout although nothing reads it there: rate limiting,
+// adaptive difficulty and country stats take the IP from the request itself.
+// The path is logged without its query string, which carries ?apiKey=.
+// logClientIP (GATECHA_LOG_CLIENT_IP) adds the IP back, for debugging only.
+func RequestLogMiddleware(logger *slog.Logger, logClientIP bool) func(http.Handler) http.Handler {
+	return func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			start := time.Now()
+			ww := chiMiddleware.NewWrapResponseWriter(w, r.ProtoMajor)
+			next.ServeHTTP(ww, r)
+
+			status := ww.Status()
+			if status == 0 {
+				status = http.StatusOK
+			}
+			attrs := []any{
+				"method", r.Method,
+				"path", logSafe(r.URL.Path),
+				"status", status,
+				"bytes", ww.BytesWritten(),
+				"duration", time.Since(start),
+			}
+			if logClientIP {
+				attrs = append(attrs, "client_ip", clientIP(r))
+			}
+			logger.Info("request", attrs...)
+		})
+	}
+}
+
+// logSafe strips CR and LF from a client-supplied value before it is logged.
+// slog's text handler already quotes such values, but a JSON or custom handler
+// may not, and a raw newline would let a request forge a log line.
+func logSafe(v string) string {
+	return strings.NewReplacer("\r", "", "\n", "").Replace(v)
 }
 
 // MaxBodyBytesMiddleware caps the size of request bodies to guard against
