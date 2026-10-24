@@ -3,6 +3,7 @@ import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useAuthStore } from '../stores/auth'
+import BrandMark from './BrandMark.vue'
 
 const router = useRouter()
 const authStore = useAuthStore()
@@ -27,13 +28,13 @@ function logout() {
 </script>
 
 <template>
-  <!-- The signage band: navy in both themes, the navigation lives on it. -->
+  <!-- The header band: light like the site, the navigation lives on it. -->
   <nav class="sticky top-0 z-40 bg-band text-band-ink border-b border-band-rule" aria-label="Main">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex h-14 items-stretch gap-6 sm:gap-10">
-        <router-link to="/" class="flex items-center gap-2.5 font-extrabold text-lg tracking-tight" aria-label="GateCHA home">
-          <span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-band-ink text-band font-extrabold text-base leading-none" aria-hidden="true">G</span>
-          GateCHA
+        <router-link to="/" class="flex items-center gap-2.5 font-bold text-lg tracking-tight" aria-label="GateCHA home">
+          <BrandMark />
+          <span>Gate<span class="text-link">CHA</span></span>
         </router-link>
         <div class="hidden sm:flex items-stretch gap-1">
           <router-link
@@ -41,7 +42,7 @@ function logout() {
             :key="link.to"
             :to="link.to"
             class="flex items-center border-b-[3px] border-transparent px-4 pt-[3px] text-sm font-semibold text-band-muted transition-colors hover:text-band-ink"
-            active-class="!border-band-ink !text-band-ink"
+            active-class="!border-action !text-band-ink"
           >
             {{ link.label }}
           </router-link>
@@ -50,7 +51,7 @@ function logout() {
           <span v-if="version" class="hidden sm:inline font-mono text-xs text-band-muted">{{ version }}</span>
           <button
             @click="logout"
-            class="inline-flex min-h-8 items-center gap-1.5 rounded border border-band-rule px-3 text-sm font-semibold text-band-ink transition-colors hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-band-ink"
+            class="inline-flex min-h-8 items-center gap-1.5 rounded border border-band-rule px-3 text-sm font-semibold text-band-ink transition-colors hover:bg-sunken focus:outline-none focus-visible:ring-2 focus-visible:ring-focus"
           >
             <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
               <path
@@ -76,7 +77,7 @@ function logout() {
           :key="link.to"
           :to="link.to"
           class="flex min-h-11 items-center border-b-[3px] border-transparent px-3 text-sm font-semibold text-band-muted hover:text-band-ink"
-          active-class="!border-band-ink !text-band-ink"
+          active-class="!border-action !text-band-ink"
         >
           {{ link.label }}
         </router-link>

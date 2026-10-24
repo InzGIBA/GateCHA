@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
-/* Overpass, a typeface derived from highway signage, carries the UI; Overpass
-   Mono sets every count in tabular figures. Both ship with the app (no font
-   CDN: the admin stays tracking-free). Latin subset only. */
+/* Inter carries the UI, as on gatecha.org; Overpass Mono sets every count
+   in tabular figures. Both ship with the app (no font CDN: the admin stays
+   tracking-free). Latin subset only. */
 @font-face {
-  font-family: 'Overpass';
+  font-family: 'Inter';
   font-style: normal;
   font-weight: 100 900;
   font-display: swap;
-  src: url('../node_modules/@fontsource-variable/overpass/files/overpass-latin-wght-normal.woff2') format('woff2-variations');
+  src: url('./assets/fonts/inter-latin.woff2') format('woff2');
 }
 
 @font-face {
@@ -19,41 +19,40 @@
   src: url('../node_modules/@fontsource-variable/overpass-mono/files/overpass-mono-latin-wght-normal.woff2') format('woff2-variations');
 }
 
-/* "Info trafic": every API key is a numbered line of the network. Semantic
-   tokens only; the dark theme below redefines the same names, so components
+/* Semantic tokens only; the dark theme below redefines the same names, so components
    never branch on the theme. Text pairs hold WCAG AA (4.5:1) on ground, panel
    and sunken in both themes; strokes and marks hold 3:1. `static` emits every
-   variable even when no utility uses it: line colours are applied inline. */
+   variable even when no utility uses it: charts and sparklines read them inline. */
 @theme static {
-  --font-sans: 'Overpass', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-mono: 'Overpass Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
-  /* Surfaces and text */
-  --color-ground: #F3F5F7;
+  /* Surfaces and text: the slate neutrals gatecha.org uses */
+  --color-ground: #F8FAFC;
   --color-panel: #FFFFFF;
-  --color-sunken: #F7F8FA;
-  --color-ink: #14213D;
-  --color-ink-2: #3A4560;
-  --color-muted: #5B6478;
-  --color-rule: #DDE2E8;
-  --color-rule-soft: #EBEEF2;
-  --color-rule-strong: #B9C1CD;
+  --color-sunken: #F1F5F9;
+  --color-ink: #0F172A;
+  --color-ink-2: #334155;
+  --color-muted: #475569;
+  --color-rule: #E2E8F0;
+  --color-rule-soft: #EEF2F6;
+  --color-rule-strong: #CBD5E1;
 
-  /* The signage band and actions */
-  --color-band: #10285A;
-  --color-band-ink: #FFFFFF;
-  --color-band-muted: #C6D0E4;
-  --color-band-rule: #2A4479;
-  --color-action: #10285A;
-  --color-action-hover: #0B1E45;
+  /* The header band (light, like the site) and the GateCHA teal for actions */
+  --color-band: #FFFFFF;
+  --color-band-ink: #0F172A;
+  --color-band-muted: #475569;
+  --color-band-rule: #E2E8F0;
+  --color-action: #0F766E;
+  --color-action-hover: #115E59;
   --color-action-ink: #FFFFFF;
-  --color-link: #1F4FC1;
-  --color-link-hover: #163B94;
-  --color-focus: #1F4FC1;
+  --color-link: #0F766E;
+  --color-link-hover: #115E59;
+  --color-focus: #0F766E;
 
   /* State: only where it means something */
-  --color-ok: #00754E;
-  --color-ok-soft: #E3F4EC;
+  --color-ok: #15803D;
+  --color-ok-soft: #E7F8EC;
   --color-warn: #E8A400;
   --color-warn-ink: #2A1E00;
   --color-warn-text: #8A5A00;
@@ -62,76 +61,57 @@
   --color-fail: #C8001A;
   --color-fail-soft: #FDECEE;
   --color-fail-edge: #F4B6BE;
-  --color-closed: #ECEDEF;
-  --color-closed-ink: #5E6166;
-  --color-ok-edge: #A9DCC4;
+  --color-disabled: #ECEDEF;
+  --color-disabled-ink: #5E6166;
+  --color-ok-edge: #A7E0B8;
   --color-danger: #C8001A;
   --color-danger-hover: #A30015;
-  --color-backdrop: rgb(11 18 33 / 0.6);
+  --color-backdrop: rgb(15 23 42 / 0.6);
 
   /* Code blocks stay dark in both themes */
-  --color-code: #0E1A33;
-  --color-code-ink: #D7E3FF;
+  --color-code: #1E293B;
+  --color-code-ink: #E2E8F0;
 
-  /* Line colours: bullet fill, the number set on it, and a chart stroke tuned
-     to hold 3:1 on this theme's panel. Colours cycle; the number is the identity. */
-  --color-line-1: #FFCD00; --color-line-1-ink: #14213D; --color-line-1-stroke: #B38F00;
-  --color-line-2: #00A88F; --color-line-2-ink: #14213D; --color-line-2-stroke: #00A88F;
-  --color-line-3: #6E4C9F; --color-line-3-ink: #FFFFFF; --color-line-3-stroke: #6E4C9F;
-  --color-line-4: #F28E1C; --color-line-4-ink: #14213D; --color-line-4-stroke: #C86A00;
-  --color-line-5: #00AEEF; --color-line-5-ink: #14213D; --color-line-5-stroke: #0089C2;
-  --color-line-6: #84B817; --color-line-6-ink: #14213D; --color-line-6-stroke: #5E8A00;
-  --color-line-7: #A0006E; --color-line-7-ink: #FFFFFF; --color-line-7-stroke: #A0006E;
-  --color-line-8: #8D8D8D; --color-line-8-ink: #14213D; --color-line-8-stroke: #767676;
-  --color-line-ring: rgb(20 33 61 / 0.18);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-ground: #0B1221;
-    --color-panel: #111A2E;
-    --color-sunken: #0E1627;
-    --color-ink: #E7EBF3;
-    --color-ink-2: #C3CAD8;
-    --color-muted: #9AA4B8;
-    --color-rule: #24324D;
-    --color-rule-soft: #1A2640;
-    --color-rule-strong: #3A4B6B;
+    --color-ground: #0B1120;
+    --color-panel: #131C2E;
+    --color-sunken: #0F1726;
+    --color-ink: #F1F5F9;
+    --color-ink-2: #CBD5E1;
+    --color-muted: #94A3B8;
+    --color-rule: #2A3648;
+    --color-rule-soft: #1D2738;
+    --color-rule-strong: #475569;
 
-    --color-band: #10285A;
-    --color-band-rule: #2A4479;
-    --color-action: #3366E0;
-    --color-action-hover: #2B59C3;
-    --color-link: #8AB0FF;
-    --color-link-hover: #B3CBFF;
-    --color-focus: #8AB0FF;
+    --color-band: #131C2E;
+    --color-band-ink: #F1F5F9;
+    --color-band-muted: #94A3B8;
+    --color-band-rule: #2A3648;
+    --color-action: #0F766E;
+    --color-action-hover: #115E59;
+    --color-link: #5EEAD4;
+    --color-link-hover: #99F6E4;
+    --color-focus: #5EEAD4;
 
-    --color-ok: #3DD598;
-    --color-ok-soft: #0F2B24;
+    --color-ok: #4ADE80;
+    --color-ok-soft: #10281A;
     --color-warn-text: #F5C451;
     --color-warn-soft: #2A2208;
     --color-warn-edge: #5C4710;
     --color-fail: #FF6B7A;
     --color-fail-soft: #2E1219;
     --color-fail-edge: #6B2430;
-    --color-closed: #232C3F;
-    --color-closed-ink: #AEB6C6;
-    --color-ok-edge: #1F5A45;
+    --color-disabled: #232C3F;
+    --color-disabled-ink: #AEB6C6;
+    --color-ok-edge: #1E5A35;
     --color-danger: #C92A3E;
     --color-danger-hover: #B01F33;
-    --color-backdrop: rgb(3 6 14 / 0.72);
+    --color-backdrop: rgb(2 6 23 / 0.72);
 
-    --color-code: #070E1D;
-
-    --color-line-1-stroke: #FFCD00;
-    --color-line-2-stroke: #00C2A5;
-    --color-line-3-stroke: #A68BDB;
-    --color-line-4-stroke: #F28E1C;
-    --color-line-5-stroke: #33C3F5;
-    --color-line-6-stroke: #9CD12A;
-    --color-line-7-stroke: #E04FA8;
-    --color-line-8-stroke: #A3A3A3;
-    --color-line-ring: rgb(231 235 243 / 0.28);
+    --color-code: #0B1220;
   }
 }
 

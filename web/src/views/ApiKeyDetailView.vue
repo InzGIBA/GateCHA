@@ -7,9 +7,8 @@ import StatsChart from '../components/StatsChart.vue'
 import CountryTraffic from '../components/CountryTraffic.vue'
 import HISCalibrationPanel from '../components/HISCalibrationPanel.vue'
 import CopyButton from '../components/CopyButton.vue'
-import LineBullet from '../components/LineBullet.vue'
 import StatusChip from '../components/StatusChip.vue'
-import { lineStatus, todayUTC } from '../lib/lines'
+import { keyStatus, todayUTC } from '../lib/status'
 import ConfirmDialog from '../components/ConfirmDialog.vue'
 
 const route = useRoute()
@@ -17,9 +16,9 @@ const router = useRouter()
 const keysStore = useApiKeysStore()
 const statsStore = useStatsStore()
 
-// Same daily status as the dashboard board and the keys list.
+// Same daily status as the dashboard and the keys list.
 const todayRow = computed(() => statsStore.keyStats.find((d) => d.date === todayUTC()))
-const status = computed(() => (key.value ? lineStatus(key.value.enabled, todayRow.value) : 'quiet'))
+const status = computed(() => (key.value ? keyStatus(key.value.enabled, todayRow.value) : 'idle'))
 
 const key = ref<APIKey | null>(null)
 const showSecret = ref(false)
@@ -118,12 +117,10 @@ const hisTotals = computed(() => ({
     <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-6">
       <div class="min-w-0">
         <router-link to="/keys" class="inline-flex min-h-6 items-center text-sm text-muted hover:text-ink">&larr; Back to keys</router-link>
-        <div class="mt-1 flex items-start gap-3">
-          <LineBullet :id="key.id" size="lg" class="mt-0.5" />
+        <div class="mt-1">
           <div class="min-w-0">
-            <h1 class="text-2xl font-extrabold tracking-tight text-ink break-words">{{ key.name || key.key_id }}</h1>
+            <h1 class="text-2xl font-bold tracking-tight text-ink break-words">{{ key.name || key.key_id }}</h1>
             <p class="mt-0.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted">
-              <span>Line {{ key.id }}</span>
               <span>{{ key.enabled ? 'Key enabled' : 'Key disabled' }}</span>
               <StatusChip :status="status" :failed-today="todayRow?.verifications_fail ?? 0" />
             </p>
@@ -145,7 +142,7 @@ const hisTotals = computed(() => ({
 
     <!-- Key Info -->
     <div class="rounded-md border border-rule bg-panel p-6 mb-6">
-      <h2 class="text-[17px] font-extrabold text-ink mb-4">Key Details</h2>
+      <h2 class="text-[17px] font-semibold text-ink mb-4">Key Details</h2>
       <dl class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <dt class="text-sm font-medium text-muted">Key ID</dt>
@@ -238,7 +235,7 @@ const hisTotals = computed(() => ({
 
     <!-- Integration Snippet -->
     <div class="rounded-md border border-rule bg-panel p-6 mb-6">
-      <h2 class="text-[17px] font-extrabold text-ink mb-4">Integration</h2>
+      <h2 class="text-[17px] font-semibold text-ink mb-4">Integration</h2>
       <div class="relative">
         <pre class="bg-code text-code-ink text-sm p-4 pr-12 rounded-md overflow-x-auto"><code>{{ widgetSnippet }}</code></pre>
         <CopyButton
@@ -268,9 +265,9 @@ const hisTotals = computed(() => ({
 
     <!-- Stats -->
     <div class="mb-6 rounded-md border border-rule bg-panel p-6">
-      <h2 class="text-[17px] font-extrabold text-ink mb-4">Statistics (30 days)</h2>
+      <h2 class="text-[17px] font-semibold text-ink mb-4">Statistics (30 days)</h2>
       <div class="mb-1 flex flex-wrap gap-x-6 gap-y-1 text-sm">
-        <span class="text-muted">HIS <span class="rounded-[3px] border border-rule px-1.5 py-0.5 text-[11px] font-bold uppercase tracking-[0.08em] text-muted">Monitor</span>:</span>
+        <span class="text-muted">HIS <span class="rounded-[3px] border border-rule px-1.5 py-0.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-muted">Monitor</span>:</span>
         <span class="text-ink"><span class="font-mono tabular-nums">{{ hisTotals.observations.toLocaleString('en-US') }}</span> observed</span>
         <span class="text-ink"><span class="font-mono tabular-nums">{{ hisTotals.suspected.toLocaleString('en-US') }}</span> bot-suspected</span>
       </div>
@@ -283,7 +280,7 @@ const hisTotals = computed(() => ({
         Monitor mode: suspected requests are counted and reported, never blocked. Turn on
         "Block suspected bots" in this key's settings to act on the score.
       </p>
-      <StatsChart v-if="statsStore.keyStats.length" :data="statsStore.keyStats" :line-id="key.id" />
+      <StatsChart v-if="statsStore.keyStats.length" :data="statsStore.keyStats" />
       <p v-else class="text-muted text-center py-12">No data yet</p>
     </div>
 
