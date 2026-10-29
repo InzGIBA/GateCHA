@@ -1,5 +1,79 @@
 # Changelog
 
+## [0.3.4](https://github.com/InzGIBA/GateCHA/compare/v0.13.1...v0.3.4) (2026-10-29)
+
+
+### Features
+
+* **admin:** add revocable per-person MCP tokens and an endpoint toggle ([#141](https://github.com/InzGIBA/GateCHA/issues/141)) ([e62e673](https://github.com/InzGIBA/GateCHA/commit/e62e6730cff6e981ea71678210f0459f1b1ac9f4))
+* **altcha:** adaptive proof-of-work difficulty per key (opt-in) ([#39](https://github.com/InzGIBA/GateCHA/issues/39)) ([453b69f](https://github.com/InzGIBA/GateCHA/commit/453b69f20888048432b355c005311cdeb2be7f10))
+* **api:** expose the API key management tools over MCP ([#144](https://github.com/InzGIBA/GateCHA/issues/144)) ([21f0726](https://github.com/InzGIBA/GateCHA/commit/21f0726994922f6ec8ea6abd5065e1a780eb43e3))
+* **api:** per-key stats token and GET /api/v1/stats ([#242](https://github.com/InzGIBA/GateCHA/issues/242)) ([7abbb6d](https://github.com/InzGIBA/GateCHA/commit/7abbb6d14b773b35caebf996c786d5a9e15f4b58))
+* **api:** return the HIS score from /verify ([#156](https://github.com/InzGIBA/GateCHA/issues/156)) ([6f1bdad](https://github.com/InzGIBA/GateCHA/commit/6f1bdad5a32eaea9d20f35a6b3cb2fc0c05980cd))
+* **api:** serve the MCP endpoint over streamable HTTP ([#143](https://github.com/InzGIBA/GateCHA/issues/143)) ([799b973](https://github.com/InzGIBA/GateCHA/commit/799b973d413c82a60f488de36b77a3f6328eacca)), closes [#140](https://github.com/InzGIBA/GateCHA/issues/140)
+* **dashboard:** a denser, calmer API key list ([#232](https://github.com/InzGIBA/GateCHA/issues/232)) ([6de51d9](https://github.com/InzGIBA/GateCHA/commit/6de51d9c0093322e032ec8d1f5530549764bed0b))
+* **dashboard:** attention-first dashboard in GateCHA teal, drop the metro theme ([#239](https://github.com/InzGIBA/GateCHA/issues/239)) ([c34eedb](https://github.com/InzGIBA/GateCHA/commit/c34eedba225a47715bb4782d183af0779183240f))
+* **dashboard:** delete a key from the key list ([#246](https://github.com/InzGIBA/GateCHA/issues/246)) ([78a3f69](https://github.com/InzGIBA/GateCHA/commit/78a3f696f57471b731a8d87b223f6d366a632c43))
+* **dashboard:** redesign as a traffic status board ("Info trafic") ([#235](https://github.com/InzGIBA/GateCHA/issues/235)) ([268f89d](https://github.com/InzGIBA/GateCHA/commit/268f89d9ffd5bef66b29f1885477304fa8a0766e))
+* **dashboard:** search and paginate the API keys list ([#137](https://github.com/InzGIBA/GateCHA/issues/137)) ([41c893c](https://github.com/InzGIBA/GateCHA/commit/41c893c0469a3d64b311c3540d1b17abbccee85e)), closes [#136](https://github.com/InzGIBA/GateCHA/issues/136)
+* **docker:** move to docker buildx bake with mysql and arm64 images ([#200](https://github.com/InzGIBA/GateCHA/issues/200)) ([d92b0b6](https://github.com/InzGIBA/GateCHA/commit/d92b0b61acee1fa520f70ee0744b2edc31101fcf))
+* **geo:** traffic-by-country panel with flags (privacy-first, no IP stored) ([#42](https://github.com/InzGIBA/GateCHA/issues/42)) ([b0fe377](https://github.com/InzGIBA/GateCHA/commit/b0fe37740b526e557702a24fefcdfabe3aac67f9))
+* **his:** Human Interaction Signature — Monitor mode (DIY HIS) ([#40](https://github.com/InzGIBA/GateCHA/issues/40)) ([a7d49a1](https://github.com/InzGIBA/GateCHA/commit/a7d49a1f0a5f4a14216f1c45913a19414a40d8a2))
+* **his:** per-key HIS enforcement with a configurable suspect threshold ([#177](https://github.com/InzGIBA/GateCHA/issues/177)) ([6a004fc](https://github.com/InzGIBA/GateCHA/commit/6a004fcef3ff65bc3afc8f93c0a7a3b438400859))
+* **his:** raw-signal sampling + calibration (enforcement foundation) ([#46](https://github.com/InzGIBA/GateCHA/issues/46)) ([31d4739](https://github.com/InzGIBA/GateCHA/commit/31d473939abf8d9a4144e4a07b42daafa92b8005))
+* **his:** serve an embeddable interaction-signal collector ([#150](https://github.com/InzGIBA/GateCHA/issues/150)) ([61d9d23](https://github.com/InzGIBA/GateCHA/commit/61d9d23456c347eb7d5837b68edb80bf884ab9b3))
+* multi-domain + wildcard keys, login footer, brand favicon ([#50](https://github.com/InzGIBA/GateCHA/issues/50)) ([19ed436](https://github.com/InzGIBA/GateCHA/commit/19ed436f13d556d3e12a62d4b268c19465fd8a65))
+* **ratelimit:** per-key rate limit (config + enforcement + UI) ([#37](https://github.com/InzGIBA/GateCHA/issues/37)) ([d27b10e](https://github.com/InzGIBA/GateCHA/commit/d27b10e7ec0254abba26a47c4bcf97ea52e7e53d))
+* **security:** rate limiting, security headers & body size limits ([#26](https://github.com/InzGIBA/GateCHA/issues/26)) ([771a88f](https://github.com/InzGIBA/GateCHA/commit/771a88f1d8b01d9deedff2cd1d3bf3f31e4e9b4f))
+* **ui:** copy buttons for key/instance URL + inject version in Docker CI ([#55](https://github.com/InzGIBA/GateCHA/issues/55)) ([20f9dfb](https://github.com/InzGIBA/GateCHA/commit/20f9dfbc0d74ea3cf6493bcda2742868dbd8325a))
+* **ui:** dashboard footer with gatecha.org link + build version ([#47](https://github.com/InzGIBA/GateCHA/issues/47)) ([c2a0124](https://github.com/InzGIBA/GateCHA/commit/c2a0124165dbf86011e20f9522e75ec65ada6f33))
+* **ui:** icon copy buttons with tooltip + colored On/Off badges ([#59](https://github.com/InzGIBA/GateCHA/issues/59)) ([b7dc04b](https://github.com/InzGIBA/GateCHA/commit/b7dc04b221c3233ca716e4bb412e2b7e04dc4788))
+* **ui:** link the footer version to its GitHub release ([#63](https://github.com/InzGIBA/GateCHA/issues/63)) ([d296743](https://github.com/InzGIBA/GateCHA/commit/d2967434060ba8d296e8e149dffae2728fbe2054))
+* **ui:** professional dashboard redesign aligned with the brand identity ([#43](https://github.com/InzGIBA/GateCHA/issues/43)) ([9b02b69](https://github.com/InzGIBA/GateCHA/commit/9b02b6903a6be1366ebf9adac60e80293b959a10))
+
+
+### Bug Fixes
+
+* **api:** count /verify's per-IP limit per API key ([#244](https://github.com/InzGIBA/GateCHA/issues/244)) ([dc74c98](https://github.com/InzGIBA/GateCHA/commit/dc74c98828a2bba780406121343504fdb4c73ca2))
+* **api:** send Cache-Control: no-store on all JSON responses ([#35](https://github.com/InzGIBA/GateCHA/issues/35)) ([b9980a2](https://github.com/InzGIBA/GateCHA/commit/b9980a2b85e781cf4526e50174a6b2c018924b7a))
+* **api:** stop returning HMAC secrets from the keys listing ([#139](https://github.com/InzGIBA/GateCHA/issues/139)) ([d98d488](https://github.com/InzGIBA/GateCHA/commit/d98d48853328a36240951bb86c6dc0e5bdf8820c))
+* **captcha:** use altcha v3 `challenge` attribute, not v2 `challengeurl` ([#36](https://github.com/InzGIBA/GateCHA/issues/36)) ([8c4c515](https://github.com/InzGIBA/GateCHA/commit/8c4c51513ca6ea064b1ad13afd56a49318927564))
+* **ci:** make setup-go actually install the newest Go patch ([#128](https://github.com/InzGIBA/GateCHA/issues/128)) ([8c17d37](https://github.com/InzGIBA/GateCHA/commit/8c17d37f072f7a7bfc8aa99507cc8ab12ff0183d))
+* **ci:** point the :latest image at the newest release, not main ([#123](https://github.com/InzGIBA/GateCHA/issues/123)) ([3933de8](https://github.com/InzGIBA/GateCHA/commit/3933de80265af6583240e1d425a31ee4d522a7f8))
+* **config:** use GATECHA_DB_DSN env var name in compose and Makefile ([#28](https://github.com/InzGIBA/GateCHA/issues/28)) ([d03936a](https://github.com/InzGIBA/GateCHA/commit/d03936a0f85d0e2a03f477913f2d494636296c01))
+* **dashboard:** clear the SonarQube findings on the redesign ([#238](https://github.com/InzGIBA/GateCHA/issues/238)) ([eeb68f0](https://github.com/InzGIBA/GateCHA/commit/eeb68f0ed9b0842660b9c34974a00357316736f9))
+* **dashboard:** make buttons, labels and dialogs follow one rule ([#236](https://github.com/InzGIBA/GateCHA/issues/236)) ([5c591e1](https://github.com/InzGIBA/GateCHA/commit/5c591e1bd73029e2f1736e148c41dcdd8720f3d1))
+* **dashboard:** make the settings toggles clickable ([#147](https://github.com/InzGIBA/GateCHA/issues/147)) ([2aea568](https://github.com/InzGIBA/GateCHA/commit/2aea568de6bfe9b281221f4d6d0e9ec6fc5c4230)), closes [#146](https://github.com/InzGIBA/GateCHA/issues/146)
+* **dashboard:** show the build version in the footer after logging in ([#114](https://github.com/InzGIBA/GateCHA/issues/114)) ([4c3ba67](https://github.com/InzGIBA/GateCHA/commit/4c3ba67983ed27da076315f7c88838c526dcf87f))
+* **dashboard:** unbreak the login captcha (altcha 3.4.0 -&gt; 3.4.1) ([#229](https://github.com/InzGIBA/GateCHA/issues/229)) ([7df5a98](https://github.com/InzGIBA/GateCHA/commit/7df5a988a161aab12dbdcac7388fc87507a68c99))
+* **dashboard:** WCAG AA, phone layouts and a clearer new-key screen ([#221](https://github.com/InzGIBA/GateCHA/issues/221)) ([a17559b](https://github.com/InzGIBA/GateCHA/commit/a17559bde3095254dd466d5b79a25910e74308c6))
+* **db:** prevent daily_stats wipe on SQLite migration (ON DELETE CASCADE) ([#29](https://github.com/InzGIBA/GateCHA/issues/29)) ([1a1732e](https://github.com/InzGIBA/GateCHA/commit/1a1732e71678c96e3b0ec6d3626c5c84fcba63c1))
+* **his:** bucket calibration scores with FLOOR so MySQL stops 500ing ([#173](https://github.com/InzGIBA/GateCHA/issues/173)) ([02da2cd](https://github.com/InzGIBA/GateCHA/commit/02da2cdb0c234980e2748f0b42f619e387252a8e))
+* **privacy:** stop logging visitor IPs in the request log ([#226](https://github.com/InzGIBA/GateCHA/issues/226)) ([b5f41f0](https://github.com/InzGIBA/GateCHA/commit/b5f41f0fed4445c0807065a1a710b10dcbe7801d))
+* **ratelimit:** warn when TRUST_PROXY is off behind a proxy (login captcha breaks) ([#34](https://github.com/InzGIBA/GateCHA/issues/34)) ([f9507e8](https://github.com/InzGIBA/GateCHA/commit/f9507e856c124f7e7ef7f2b08ce35b6e7dc14dae))
+* **security:** build releases on a patched Go toolchain, move off EOL Alpine ([#108](https://github.com/InzGIBA/GateCHA/issues/108)) ([ed85dd2](https://github.com/InzGIBA/GateCHA/commit/ed85dd2e807742b878831f43e853fb473280f55c))
+* **security:** rebuild on Go 1.27.2 and scan the shipped release daily ([#204](https://github.com/InzGIBA/GateCHA/issues/204)) ([d6fd1e4](https://github.com/InzGIBA/GateCHA/commit/d6fd1e419f22012f523937dc9a3764285171040d))
+* **security:** rebuild on Go 1.27.3 (GO-2026-6809) ([#222](https://github.com/InzGIBA/GateCHA/issues/222)) ([5f93a9c](https://github.com/InzGIBA/GateCHA/commit/5f93a9cfe9bf0e2ee26eb042d02cd94a6f8d4ff5))
+* **sonar:** clear 2 issues on main (S1192, S7758) ([#45](https://github.com/InzGIBA/GateCHA/issues/45)) ([788b4ad](https://github.com/InzGIBA/GateCHA/commit/788b4ade15fe75226eb62bcf9102fe69d5f45879))
+* **sonar:** clear the two open SonarQube issues ([#248](https://github.com/InzGIBA/GateCHA/issues/248)) ([66ea6a6](https://github.com/InzGIBA/GateCHA/commit/66ea6a69ef8777ccee830384d7634dbdd7dc499a))
+* **sonar:** hoist fetchHISCalibration to module scope (S7721) ([#48](https://github.com/InzGIBA/GateCHA/issues/48)) ([d12f458](https://github.com/InzGIBA/GateCHA/commit/d12f458e2da6f65cb21de15a2ab2fb7b88a2b458))
+* **sonar:** split config.Load to cut cognitive complexity (S3776) ([#27](https://github.com/InzGIBA/GateCHA/issues/27)) ([e0aa653](https://github.com/InzGIBA/GateCHA/commit/e0aa653a6e2424e137f969f2b1d1c7dd3f5bc646))
+* **sonar:** use &lt;output&gt; instead of role=status in CopyButton (S6819) ([#61](https://github.com/InzGIBA/GateCHA/issues/61)) ([df69a18](https://github.com/InzGIBA/GateCHA/commit/df69a182a4a7399e5bcf2b14e3b1b19619f2ecae))
+* **sonar:** use Number.NaN over global NaN in HIS collector (S7773) ([#41](https://github.com/InzGIBA/GateCHA/issues/41)) ([edb404b](https://github.com/InzGIBA/GateCHA/commit/edb404b9647cc1ca7cc728a21d2c6ff50d4fe96e))
+* **ui:** draw the switch as one SVG so the track splits evenly ([#164](https://github.com/InzGIBA/GateCHA/issues/164)) ([0df89c3](https://github.com/InzGIBA/GateCHA/commit/0df89c3dd9e27d55426fee47b37b28aa6b419930))
+* **ui:** footer links + stack "Traffic by country" header ([#65](https://github.com/InzGIBA/GateCHA/issues/65)) ([59bde01](https://github.com/InzGIBA/GateCHA/commit/59bde018c597450c60650d0abe4f2d087594161b))
+* **ui:** give the switch knob clearance that survives browser zoom ([#160](https://github.com/InzGIBA/GateCHA/issues/160)) ([e8b3bbc](https://github.com/InzGIBA/GateCHA/commit/e8b3bbcde8991117d009c448a53d71598fcb008f))
+* **ui:** point the threshold marker at the threshold, and show the two averages ([#175](https://github.com/InzGIBA/GateCHA/issues/175)) ([9accd58](https://github.com/InzGIBA/GateCHA/commit/9accd589477088dfa6effd4428956c5149993e60))
+* **ui:** say plainly that HIS Monitor does not enforce ([#152](https://github.com/InzGIBA/GateCHA/issues/152)) ([1e4da93](https://github.com/InzGIBA/GateCHA/commit/1e4da93c4ad77bce785d5863c1faaf28de71f761))
+* **ui:** tell the four HIS calibration empty states apart ([#171](https://github.com/InzGIBA/GateCHA/issues/171)) ([e0e763f](https://github.com/InzGIBA/GateCHA/commit/e0e763f5a86c9f1fb6adc0d3bea0b8440d130111))
+* **ui:** widen the knob inset to 4px so the pill's cap stays closed ([#162](https://github.com/InzGIBA/GateCHA/issues/162)) ([a7288a0](https://github.com/InzGIBA/GateCHA/commit/a7288a0b5f1723859eb7c9970f5dc5c1cc019d0d))
+* **ui:** widen the settings page, centre the toggle knob, drop confirm() ([#158](https://github.com/InzGIBA/GateCHA/issues/158)) ([0211df1](https://github.com/InzGIBA/GateCHA/commit/0211df1fd8988d0ac14cdc69e6403bba2d211508))
+
+
+### Continuous Integration
+
+* bump release-please-action to v5 (Node 24) ([#58](https://github.com/InzGIBA/GateCHA/issues/58)) ([edba115](https://github.com/InzGIBA/GateCHA/commit/edba1154d5fcfc35aa2af95698e2ff297d45763f))
+
 ## [0.13.1](https://github.com/Upellift99/GateCHA/compare/v0.13.0...v0.13.1) (2026-10-24)
 
 
